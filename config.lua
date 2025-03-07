@@ -2,7 +2,6 @@ Config = {}
 
 Config.Debug = true
 
-Config.Framework = 'qb'            -- qb , qbx, esx
 Config.Notification = 'ox'         -- ox , qb, esx
 Config.Inventory = 'ox'            -- ox , qb
 Config.Progress = 'ox-circle'      -- ox-normal , ox-circle , qb, esx
