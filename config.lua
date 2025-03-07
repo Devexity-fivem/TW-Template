@@ -2,6 +2,7 @@ Config = {}
 
 Config.Debug = true
 
+Config.Framework = 'auto'          -- auto, qbx , qb, esx
 Config.Notification = 'ox'         -- ox , qb, esx
 Config.Inventory = 'ox'            -- ox , qb
 Config.Progress = 'ox-circle'      -- ox-normal , ox-circle , qb, esx
@@ -14,12 +15,14 @@ function dbug(...)
 end
 
 function SetupBridge()
-    if GetResourceState('qbx_core') == 'started' then
-        Config.Framework = 'qbx'
-    elseif GetResourceState('qb_core') == 'started' then
-        Config.Framework = 'qb'
-    elseif GetResourceState('es_extended') == 'started' then
-        Config.Framework = 'qb'
+    if Config.Framework == 'auto' then
+        if GetResourceState('qbx_core') == 'started' then
+            Config.Framework = 'qbx'
+        elseif GetResourceState('qb_core') == 'started' then
+            Config.Framework = 'qb'
+        elseif GetResourceState('es_extended') == 'started' then
+            Config.Framework = 'qb'
+        end
     end
 
     dbug('Framework found: ' .. Config.Framework)
