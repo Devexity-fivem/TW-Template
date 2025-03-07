@@ -1,3 +1,7 @@
+if Config.Framework == 'qb' then QBCore = exports['qb-core']:GetCoreObject() end
+if Config.Framework == 'qbx' then qbx = exports.qbx_core end
+if Config.Framework == 'esx' then ESX = exports["es_extended"]:getSharedObject() end
+
 ---@param src number # player source
 ---@param item string # item name
 ---@param amount number # amount to take from player

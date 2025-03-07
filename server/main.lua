@@ -1,4 +1,6 @@
 if Config.Framework == 'qb' then QBCore = exports['qb-core']:GetCoreObject() end
+if Config.Framework == 'qbx' then qbx = exports.qbx_core end
+if Config.Framework == 'esx' then ESX = exports["es_extended"]:getSharedObject() end
 
 ---@param orgin string # orgin where this is being called
 ---@param playerId number # center of check
