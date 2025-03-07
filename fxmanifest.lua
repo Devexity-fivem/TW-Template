@@ -1,8 +1,8 @@
 fx_version 'cerulean'
 game 'gta5'
 
-description 'TW-Template'
-version '1.0.0'
+description 'tw_bridge'
+version '2.0.0'
 
 shared_script {
     '@ox_lib/init.lua',
