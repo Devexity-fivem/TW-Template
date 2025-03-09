@@ -21,7 +21,7 @@ function SetupBridge()
         elseif GetResourceState('qb_core') == 'started' then
             Config.Framework = 'qb'
         elseif GetResourceState('es_extended') == 'started' then
-            Config.Framework = 'qb'
+            Config.Framework = 'esx'
         end
     end
 
