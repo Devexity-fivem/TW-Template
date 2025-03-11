@@ -1,5 +1,4 @@
-if Config.Framework == 'qb' or Config.Framework == 'qbx' then QBCore = exports['qb-core']:GetCoreObject() end
-if Config.Framework == 'esx' then ESX = exports["es_extended"]:getSharedObject() end
+local coreObject = GetFrameworkObject()
 
 ---@param duration number # length of progress
 ---@param label string # progress text
@@ -8,7 +7,7 @@ local function doProgress(duration, label, anim)
   if not anim then anim = {} end
 
   if Config.Progress == 'qb' then
-    QBCore.Functions.Progressbar(label, label, duration, false, true, {
+    coreObject.Functions.Progressbar(label, label, duration, false, true, {
         disableMovement = true,
         disableCarMovement = false,
         disableMouse = false,
@@ -42,7 +41,7 @@ local function doProgress(duration, label, anim)
       return false
     end
   elseif Config.Progress == 'esx' then
-    ESX.Progressbar(label, duration, {
+    coreObject.Progressbar(label, duration, {
       FreezePlayer = true,
       animation = {
         type = "anim",

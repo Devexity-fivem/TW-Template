@@ -1,23 +1,20 @@
-if Config.Framework == 'qb'  then QBCore = exports['qb-core']:GetCoreObject() end
-if Config.Framework == 'qbx' then qbx = exports.qbx_core end
-if Config.Framework == 'esx' then ESX = exports["es_extended"]:getSharedObject() end
-
+local coreObject = GetFrameworkObject()
 
 ---@param src number # player source
 ---@param amount number # amount to take from player
 local function takeMoney(src, amount, reason)
   if Config.Framework == 'qbx' then
-    if qbx:GetMoney(src, 'cash') >= amount then
-      qbx:RemoveMoney(src, 'cash', amount, reason)
+    if exports.qbx_core:GetMoney(src, 'cash') >= amount then
+      exports.qbx_core:RemoveMoney(src, 'cash', amount, reason)
       return true
-    elseif qbx:GetMoney(src, 'bank') >= amount then
-      qbx:RemoveMoney(src, 'bank', amount, reason)
+    elseif exports.qbx_core:GetMoney(src, 'bank') >= amount then
+      exports.qbx_core:RemoveMoney(src, 'bank', amount, reason)
       return true
     else
       return false
     end
   elseif Config.Framework == 'qb' then
-    local plr = qb.Functions.GetPlayer(src)
+    local plr = coreObject.Functions.GetPlayer(src)
     if not plr then return false end
     if plr.Functions.GetMoney('cash') >= amount then -- Changed > to >=
       plr.Functions.RemoveMoney('cash', amount)
@@ -29,7 +26,7 @@ local function takeMoney(src, amount, reason)
       return false
     end
   elseif Config.Framework == 'esx' then
-    local plr = ESX.GetPlayerFromId(src)
+    local plr = coreObject.GetPlayerFromId(src)
     if not plr then return false end
     if plr.getMoney() >= amount then
       plr.removeMoney(amount)
@@ -47,13 +44,13 @@ exports('takeMoney', takeMoney)
 ---@param reason string # reason for change
 local function addMoney(src, amount, account, reason)
   if Config.Framework == 'qbx' then
-    qbx:AddMoney(src, account, amount, reason)
+    exports.qbx_core:AddMoney(src, account, amount, reason)
   elseif Config.Framework == 'qb' then
-    local plr = qb.Functions.GetPlayer(src)
+    local plr = coreObject.Functions.GetPlayer(src)
     if not plr then return false end
     plr.Functions.AddMoney(account, amount)
   elseif Config.Framework == 'esx' then
-    local plr = ESX.GetPlayerFromId(src)
+    local plr = coreObject.GetPlayerFromId(src)
     if not plr then return false end
     plr.addMoney(amount)
   end

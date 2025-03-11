@@ -1,6 +1,4 @@
-if Config.Framework == 'qb' then QBCore = exports['qb-core']:GetCoreObject() end
-if Config.Framework == 'qbx' then qbx = exports.qbx_core end
-if Config.Framework == 'esx' then ESX = exports["es_extended"]:getSharedObject() end
+local coreObject = nil
 
 ---@param orgin string # orgin where this is being called
 ---@param playerId number # center of check
@@ -29,24 +27,18 @@ local function distanceCheck(playerId, coords, radius)
 end
 exports('distanceCheck', distanceCheck)
 
+function GetFrameworkObject()
+  if not coreObject then
+    if Config.Framework == 'qb' then coreObject = exports['qb-core']:GetCoreObject() end
+    if Config.Framework == 'esx' then coreObject = exports["es_extended"]:getSharedObject() end
+  end
 
-lib.callback.register('nameOFscript:server:nameOFwhathappens', function(source)
-  return true
-end)
-
-RegisterNetEvent('nameOFscript:server:nameOFwhathappens', function ()
-  -- Templete netevent
-end)
-
+  return coreObject
+end
 
 AddEventHandler('onResourceStart', function(resourceName)
   if (GetCurrentResourceName() ~= resourceName) then return end
 
-  -- code here
-end)
-
-AddEventHandler('onResourceStop', function(resourceName)
-  if (GetCurrentResourceName() ~= resourceName) then return end
-
-  -- code here
+  if Config.Framework == 'qb' then coreObject = exports['qb-core']:GetCoreObject() end
+  if Config.Framework == 'esx' then coreObject = exports["es_extended"]:getSharedObject() end
 end)

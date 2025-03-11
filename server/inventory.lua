@@ -1,6 +1,4 @@
-if Config.Framework == 'qb' then QBCore = exports['qb-core']:GetCoreObject() end
-if Config.Framework == 'qbx' then qbx = exports.qbx_core end
-if Config.Framework == 'esx' then ESX = exports["es_extended"]:getSharedObject() end
+local coreObject = GetFrameworkObject()
 
 ---@param src number # player source
 ---@param item string # item name
@@ -11,7 +9,7 @@ local function removeItem(src, item, amount)
   elseif Config.Inventory == 'qb' then
     exports['qb-inventory']:RemoveItem(src, item, amount)
   elseif Config.Inventory == 'esx' then
-    local plr = ESX.GetPlayerFromId(src)
+    local plr = coreObject.GetPlayerFromId(src)
     if not plr then return false end
     plr.removeInventoryItem(item, amount)
   end
@@ -35,7 +33,7 @@ local function addItem(src, item, amount)
       doNotify(src, 5000, 'Inventory: ', 'You cant carry that!', 'error')
     end
   elseif Config.Inventory == 'esx' then
-    local plr = ESX.GetPlayerFromId(src)
+    local plr = coreObject.GetPlayerFromId(src)
     if not plr then return false end
     if plr.canCarryItem(item, amount) then
       plr.addInventoryItem(item, amount)

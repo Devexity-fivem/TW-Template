@@ -1,5 +1,4 @@
-if Config.Framework == 'qb' or Config.Framework == 'qbx' then QBCore = exports['qb-core']:GetCoreObject() end
-if Config.Framework == 'esx' then ESX = exports["es_extended"]:getSharedObject() end
+local coreObject = GetFrameworkObject()
 
 ---@param duration number # Length of noti
 ---@param title string # noti title can be empty string for qb
@@ -7,9 +6,9 @@ if Config.Framework == 'esx' then ESX = exports["es_extended"]:getSharedObject()
 ---@param type string # success or error
 local function doNotify(duration, title, desc, type)
   if Config.Notification == 'qb' then
-    QBCore.Functions.Notify(title .. ": " .. desc, type, duration)
+    coreObject.Functions.Notify(title .. ": " .. desc, type, duration)
   elseif Config.Notification == 'esx' then
-    ESX.ShowNotification(title .. ": " .. desc, type, duration)
+    coreObject.ShowNotification(title .. ": " .. desc, type, duration)
   else
     lib.notify({
       title = title,

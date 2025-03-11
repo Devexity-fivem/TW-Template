@@ -9,12 +9,15 @@ shared_script {
     'config.lua'
 }
 
-server_scripts {
-    'server/*.lua'
-}
-
 client_script {
     'client/*.lua'
+}
+
+server_scripts {
+    'server/main.lua',
+    'server/money.lua',
+    'server/inventory.lua',
+    'server/notify.lua',
 }
 
 lua54 'yes'
